@@ -1,5 +1,6 @@
 # robot-registerlogin
-Register and login automation test script using Robot Framework
+Register and login automation test script using Robot Framework.
+The site in this script and test cases is NOT affiliated with me.
 
 ## 1. Registration 
 For test script registration, I use generate random string combined with timestamp to ensure uniqueness of email. If I only use timestamp then it can have same email when test script executed at same time (for multi browser testing). If using only random string there's still slightly chance it will have same email.
