@@ -1,0 +1,32 @@
+*** Settings ***
+Test Setup        Open Website
+Test Teardown     Exit Browser
+Test Template     Login with invalid credentials should fail
+Resource          ../Resource.robot
+
+*** Variables ***
+${VALID_USERNAME}    ggwp@hooq.com
+${VALID_PASSWORD}    qwe123
+
+*** Test Cases ***    USERNAME             PASS
+Invalid Username      invalid@xyz.com      ${VALID_PASSWORD}
+
+Invalid Password      ${VALID_USERNAME}    invalid
+
+Invalid Both          invalid@xyz.com      invalid
+
+Empty Username        ${EMPTY}             ${VALID_PASSWORD}
+
+Empty Password        ${VALID_USERNAME}    ${EMPTY}
+
+Empty Both            ${EMPTY}             ${EMPTY}
+
+*** Keywords ***
+Login with invalid credentials should fail
+    [Arguments]    ${username}    ${pass}
+    Click Element    ${SignIn}
+    Input Text    ${Email}    ${USERNAME}
+    Input Text    ${Password}    ${PASS}
+    Click Element    ${Submit_SignIn}
+    Page Should Contain Element    ${Alert_bar}
+    Page Should Not Contain Element    ${SignOut}
